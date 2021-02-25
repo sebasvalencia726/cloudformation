@@ -180,6 +180,28 @@ Resources:
                 Resource:
                   - !GetAtt KMSKey.Arn
 
+  CloudFormationRole:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service:
+                - cloudformation.amazonaws.com
+            Action:
+              - sts:AssumeRole
+      Policies:
+        - PolicyName: cloudformation-policy
+          PolicyDocument:
+            Version: "2012-10-17"
+            Statement:
+              - Effect: Allow
+                Action:
+                  - cloudformation:*
+                Resource: "*"
+
   LambdaPolicyEC2:
       Type: AWS::IAM::ManagedPolicy
       Properties:
