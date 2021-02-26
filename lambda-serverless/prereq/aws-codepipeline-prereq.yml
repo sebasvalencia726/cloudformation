@@ -160,10 +160,13 @@ Resources:
                   - codebuild:StopBuild
                   - sns:Publish
                   - cloudwatch:*
+                  - lambda:CreateFunction
                   - lambda:InvokeFunction
                   - lambda:ListFunctions
+                  - iam:PassRole 
                   - s3:*
                   - iam:PassRole
+                  - cloudformation:CreateStack
                   - cloudformation:DescribeStacks
                   - cloudformation:CreateChangeSet
                   - cloudformation:DeleteChangeSet
@@ -199,7 +202,17 @@ Resources:
             Statement:
               - Effect: Allow
                 Action:
+                  - iam:AttachRolePolicy
+                  - iam:CreateRole
+                  - iam:DeleteRole
+                  - iam:DetachRolePolicy 
+                  - iam:GetRole
+                  - iam:PassRole
                   - cloudformation:*
+                  - lambda:CreateFunction
+                  - lambda:DeleteFunction
+                  - lambda:GetFunction
+                  - s3:*
                 Resource: "*"
 
   LambdaPolicyEC2:
